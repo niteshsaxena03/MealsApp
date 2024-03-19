@@ -1,10 +1,15 @@
-import { View, Text } from "react-native";
+import { View, Text, Pressable, Image } from "react-native";
 
-function MealItem({title}) {
-    return(
-       <View>
-        <Text>{title}</Text>
-       </View>
+function MealItem({title,imageURL}) {
+    return (
+      <View>
+        <Pressable>
+          <View>
+          <Image source={{uri:imageURL}}/>
+            <Text>{title}</Text>
+          </View>
+        </Pressable>
+      </View>
     );
 }
 export default MealItem;
