@@ -18,11 +18,16 @@ function MealDetailScreen({ route }) {
         affordability={selectedMeal.affordability}
         textStyle={styles.detailText}
       />
-      <Text>Ingredients</Text>
+      <View style={styles.subtitleContainer}>
+        <Text style={styles.subtitle}>Ingredients</Text>
+      </View>
+
       {selectedMeal.ingredients.map((ingredient) => (
         <Text key={ingredient}>{ingredient}</Text>
       ))}
-      <Text>Steps</Text>
+      <View style={styles.subtitleContainer}>
+        <Text style={styles.subtitle}>Steps</Text>
+      </View>
       {selectedMeal.steps.map((steps) => (
         <Text key={steps}>{steps}</Text>
       ))}
@@ -40,10 +45,24 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     fontSize: 24,
     margin: 8,
-    textAlign:'center',
-    color:'white'
+    textAlign: "center",
+    color: "white",
   },
-  detailText:{
-    color:'white'
-  }
+  detailText: {
+    color: "white",
+  },
+  subtitle: {
+    color: "#e2b497",
+    fontSize: 18,
+    fontWeight: "bold",
+
+    textAlign: "center",
+  },
+  subtitleContainer: {
+    marginHorizontal: 24,
+    marginVertical: 4,
+    padding: 6,
+    borderBottomColor: "#e2b497",
+    borderBottomWidth: 2,
+  },
 });
