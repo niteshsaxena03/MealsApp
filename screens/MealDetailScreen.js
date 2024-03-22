@@ -1,6 +1,8 @@
-import { Image, Text, View, StyleSheet } from "react-native";
+import { Image, Text, View, StyleSheet,ScrollView } from "react-native";
 import { MEALS } from "../data/dummy-data";
 import MealDetails from "../components/MealDetails";
+import Subtitle from "../components/MealDetail/Subtitle";
+import List from "../components/MealDetail/List";
 
 function MealDetailScreen({ route }) {
   const mealId = route.params.mealId;
@@ -8,7 +10,7 @@ function MealDetailScreen({ route }) {
   const selectedMeal = MEALS.find((meal) => meal.id === mealId);
 
   return (
-    <View>
+    <ScrollView style={styles.rootContainer}>
       <Image style={styles.image} source={{ uri: selectedMeal.imageUrl }} />
       <Text style={styles.title}>{selectedMeal.title}</Text>
 
@@ -18,20 +20,16 @@ function MealDetailScreen({ route }) {
         affordability={selectedMeal.affordability}
         textStyle={styles.detailText}
       />
-      <View style={styles.subtitleContainer}>
-        <Text style={styles.subtitle}>Ingredients</Text>
-      </View>
+      <View style={styles.listOuterContainer}>
+        <View style={styles.listContainer}>
+          <Subtitle>Ingredient</Subtitle>
+          <List data={selectedMeal.ingredients} />
 
-      {selectedMeal.ingredients.map((ingredient) => (
-        <Text key={ingredient}>{ingredient}</Text>
-      ))}
-      <View style={styles.subtitleContainer}>
-        <Text style={styles.subtitle}>Steps</Text>
+          <Subtitle>Steps</Subtitle>
+          <List data={selectedMeal.steps} />
+        </View>
       </View>
-      {selectedMeal.steps.map((steps) => (
-        <Text key={steps}>{steps}</Text>
-      ))}
-    </View>
+    </ScrollView>
   );
 }
 export default MealDetailScreen;
@@ -51,18 +49,13 @@ const styles = StyleSheet.create({
   detailText: {
     color: "white",
   },
-  subtitle: {
-    color: "#e2b497",
-    fontSize: 18,
-    fontWeight: "bold",
-
-    textAlign: "center",
+  listContainer: {
+    maxWidth: "90%",
   },
-  subtitleContainer: {
-    marginHorizontal: 24,
-    marginVertical: 4,
-    padding: 6,
-    borderBottomColor: "#e2b497",
-    borderBottomWidth: 2,
+  listOuterContainer: {
+    alignItems: "center",
+  },
+  rootContainer: {
+    marginBottom: 32,
   },
 });
