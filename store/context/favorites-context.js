@@ -10,12 +10,20 @@ function FavoritesContextProvider({ children }) {
   const [favoriteMealIds, setFavoriteMealIds] = useState([]);
 
   function addFavorite(id) {
-    setFavoriteMealIds((currentFavoriteIds)=>[...currentFavoriteIds,id]);
+    setFavoriteMealIds((currentFavoriteIds) => [...currentFavoriteIds, id]);
   }
-  function removeFavorite(id){
-    setFavoriteMealIds((currentFavoriteIds)=>currentFavoriteIds.filter((mealId)=>mealId!==id));
+  function removeFavorite(id) {
+    setFavoriteMealIds((currentFavoriteIds) =>
+      currentFavoriteIds.filter((mealId) => mealId !== id)
+    );
   }
 
-  return <FavoritesContext.Provider>{children}</FavoritesContext.Provider>;
+  const value = {
+    ids: favoriteMealIds,
+    addFavorite:addFavorite,
+    removeFavorite:removeFavorite,
+  };
+
+  return <FavoritesContext.Provider value={value}>{children}</FavoritesContext.Provider>;
 }
 export default FavoritesContextProvider;
